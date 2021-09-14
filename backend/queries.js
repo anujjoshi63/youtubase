@@ -12,10 +12,10 @@ const getVideos = (req, res) => {
 		if (err) {
 			return res.status(500).json({ err });
 		}
-		res.status(200).json(result?.rows);
+		return res.status(200).json(result?.rows);
 	});
 };
-const createVideos = (req, res) => {
+const createVideosAndGet = (req, res) => {
 	pool.query(
 		'INSERT INTO posts (title, thumbnail, views, dislikes, likes) VALUES ($1, $2, $3, $4, $5)',
 		[
@@ -26,15 +26,15 @@ const createVideos = (req, res) => {
 			req.body.likes
 		],
 		(err, result) => {
-			console.log('result', result);
 			if (err) {
 				return res.status(500).json({ err });
+			} else {
+				getVideos(req, res);
 			}
-			res.status(200).json(result?.rows);
 		}
 	);
 };
 module.exports = {
 	getVideos,
-	createVideos
+	createVideosAndGet
 };

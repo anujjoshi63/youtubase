@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/videos', db.getVideos);
-app.post('/videos', db.createVideos);
+app.post('/videos', db.createVideosAndGet);
 
 app.listen(8000, () => {
 	console.log('app listening on port 8000!');
