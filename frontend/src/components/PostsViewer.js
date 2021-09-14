@@ -2,7 +2,7 @@ import React from 'react';
 
 const PostsViewer = ({ posts }) => {
 	return (
-		<>
+		<div style={{ marginBottom: 100 }}>
 			{posts.length ? (
 				posts.map((post, index) => (
 					<div
@@ -16,20 +16,28 @@ const PostsViewer = ({ posts }) => {
 						}}
 					>
 						<div style={{ flex: 1 }}>
-							<img src={post.thumbnail} alt="" />
+							<img src={post.thumbnail} alt="" width="200rem" />
 						</div>
-						<div style={{ flex: 2, display: 'flex', flexDirection: 'column' }}>
+						<div style={{ flex: 3, display: 'flex', flexDirection: 'column' }}>
 							<b style={{ flex: 1 }}>{post.title}</b>
-							<b style={{ flex: 1 }}>Views: {post.views}</b>
-							<b style={{ flex: 1 }}>Likes: {post.likes}</b>
-							<b style={{ flex: 1 }}>Dislikes: {post.dislikes}</b>
+							<div style={{ flex: 2, display: 'flex', flexDirection: 'row' }}>
+								<span style={{ flex: 1 }}>
+									Views: <b>{post.views}</b>
+								</span>
+								<span style={{ flex: 1 }}>
+									Likes: <b>{post.likes}</b>
+								</span>
+								<span style={{ flex: 1 }}>
+									Dislikes: <b>{post.dislikes}</b>
+								</span>
+							</div>
 						</div>
 					</div>
 				))
 			) : (
 				<h3>No posts</h3>
 			)}
-		</>
+		</div>
 	);
 };
 

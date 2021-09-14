@@ -32,9 +32,9 @@ const VideoPoster = ({ setPosts, posts }) => {
 						let videoData = {
 							thumbnail: video.snippet.thumbnails.medium.url,
 							title: video.snippet.title,
-							views: video.statistics.viewCount,
-							likes: video.statistics.likeCount,
-							dislikes: video.statistics.dislikeCount
+							views: +video.statistics.viewCount,
+							likes: +video.statistics.likeCount,
+							dislikes: +video.statistics.dislikeCount
 						};
 						await fetch('http://localhost:8000/videos', {
 							method: 'POST',
@@ -45,7 +45,7 @@ const VideoPoster = ({ setPosts, posts }) => {
 						})
 							.then(res => res.json())
 							.then(data => {
-								setPosts([...posts, data]);
+								setPosts(data);
 							});
 					})
 					.catch(err => {
