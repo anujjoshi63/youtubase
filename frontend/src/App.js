@@ -7,29 +7,24 @@ import './App.css';
 
 function App() {
 	//react states
-	const [posts, setPosts] = useState([]);
-
+	const [posts, setPosts] = useState(null);
 	useEffect(() => {
-		try {
-			fetch('http://localhost:8000/videos')
-				.then(res => res.json())
-				.then(data => {
-					setPosts(data);
-				});
-		} catch (error) {
-			console.log(error);
-		}
+		fetch('http://localhost:8000/videos')
+			.then(res => res.json())
+			.then(data => {
+				setPosts(data);
+			})
+			.catch(err => {
+				console.error(err);
+			});
 	}, []);
+
 	return (
 		<Container fixed style={{ display: 'flex', flexDirection: 'column' }}>
 			<BrandHeader style={{ position: 'fixed' }} />
-			<VideoPoster
-				setPosts={setPosts}
-				posts={posts}
-				style={{ position: 'fixed' }}
-			/>
-			<Divider />
-			<PostsViewer posts={posts} />
+			<VideoPoster setPosts={setPosts} posts={posts} />
+			<Divider style={{ backgroundColor: 'black' }} />
+			{posts !== null && <PostsViewer posts={posts} />}
 		</Container>
 	);
 }

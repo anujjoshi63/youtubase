@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
-import { configure } from '@testing-library/dom';
 import config from '../config';
 const VideoPoster = ({ setPosts, posts }) => {
 	//react states
@@ -14,7 +13,6 @@ const VideoPoster = ({ setPosts, posts }) => {
 		let newURL;
 		try {
 			newURL = new URL(url);
-			// console.log(newURL);
 			let valid =
 				newURL.protocol === 'https:' &&
 				newURL.href.startsWith('https://www.youtube.com/watch?v=');
@@ -49,7 +47,7 @@ const VideoPoster = ({ setPosts, posts }) => {
 							});
 					})
 					.catch(err => {
-						console.log(err);
+						console.error(err);
 					});
 			} else {
 				alert('Please enter a valid youtube url');
