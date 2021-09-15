@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import config from '../config';
+import Swal from 'sweetalert2/';
 const VideoPoster = ({ setPosts, posts }) => {
 	//react states
 	const [url, setUrl] = useState('');
@@ -44,18 +45,38 @@ const VideoPoster = ({ setPosts, posts }) => {
 							.then(res => res.json())
 							.then(data => {
 								setPosts(data);
+								Swal.mixin({
+									toast: true,
+									position: 'bottom-end',
+									showConfirmButton: false,
+									timer: 2500,
+									timerProgressBar: false
+								}).fire({
+									icon: 'success',
+									title: 'New Post Created!😄'
+								});
 							});
 					})
 					.catch(err => {
+						Swal.fire({
+							icon: 'error',
+							title: 'Something went wrong!',
+							showConfirmButton: true
+						});
 						console.error(err);
 					});
 			} else {
-				alert('Please enter a valid youtube url');
+				Swal.fire({
+					icon: 'error',
+					title: 'Invalid URL!'
+				});
 			}
 		} catch (_) {
 			// do error action
-
-			alert('invalid URL');
+			Swal.fire({
+				icon: 'error',
+				title: 'Invalid URL!'
+			});
 		}
 	};
 	return (
