@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterPosts from './FilterPosts';
 
 const PostsViewer = ({ posts }) => {
 	//react states
 	const [filteredPosts, setFilteredPosts] = useState(posts);
+
+	useEffect(() => {
+		setFilteredPosts(posts);
+	}, [posts]);
 	return (
 		<>
 			<FilterPosts setFilteredPosts={setFilteredPosts} posts={posts} />
